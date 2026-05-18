@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perubahan Bentuk Energi</title>
 
 <style>
@@ -50,7 +50,7 @@ body{
 }
 
 .start-btn{
-  padding:15px 35px;
+  padding:16px 35px;
   border:none;
   border-radius:999px;
   background:linear-gradient(90deg,#38bdf8,#facc15);
@@ -75,6 +75,13 @@ body{
   padding:15px;
 }
 
+.stats{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
 .progress-container{
   width:100%;
   height:18px;
@@ -91,14 +98,6 @@ body{
   transition:0.4s;
 }
 
-.stats{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-  font-size:0.95rem;
-}
-
 /* ===== GRID ===== */
 .container{
   padding:20px;
@@ -106,7 +105,7 @@ body{
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:20px;
 }
 
@@ -119,7 +118,6 @@ body{
   transition:0.35s;
   position:relative;
   overflow:hidden;
-  min-height:280px;
 }
 
 .card:hover{
@@ -128,8 +126,8 @@ body{
 }
 
 .card-number{
-  width:40px;
-  height:40px;
+  width:42px;
+  height:42px;
   border-radius:50%;
   background:#facc15;
   color:#111;
@@ -142,7 +140,7 @@ body{
 
 .card h3{
   margin-bottom:15px;
-  font-size:1.1rem;
+  min-height:50px;
 }
 
 .card p{
@@ -150,75 +148,62 @@ body{
   color:#cbd5e1;
 }
 
-/* ===== ENERGY ICON AREA ===== */
-.energy-animation{
-  height:100px;
+/* ===== ENERGY ILLUSTRATION ===== */
+.energy-box{
+  height:120px;
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
-  margin-top:10px;
+  gap:18px;
+  overflow:hidden;
 }
 
-/* Electric */
+.energy-box span{
+  font-size:3.5rem;
+}
+
+/* Emoji Effects */
 .bolt{
-  font-size:2.8rem;
-  color:#38bdf8;
   animation:flash 1s infinite;
 }
 
-/* Fire */
 .fire{
-  font-size:2.8rem;
-  animation:fireAnim 1s infinite alternate;
+  animation:burn 1s infinite alternate;
 }
 
-/* Fan */
 .fan{
-  font-size:2.8rem;
   animation:spin 2s linear infinite;
 }
 
-/* Light */
 .bulb{
-  font-size:2.8rem;
-  animation:glow 1.2s infinite alternate;
+  animation:glow 1.5s infinite alternate;
 }
 
-/* Sound */
 .sound{
-  font-size:2.8rem;
-  animation:bounce 1s infinite;
+  animation:pulse 1s infinite;
 }
 
-/* Battery */
 .battery{
-  font-size:2.8rem;
-  animation:pulse 1.5s infinite;
+  animation:charge 1.5s infinite alternate;
 }
 
-/* Car */
-.car{
-  font-size:2.8rem;
-  animation:move 2s infinite alternate;
-}
-
-/* Wind */
-.wind{
-  font-size:2.8rem;
+.gear{
   animation:spin 3s linear infinite;
 }
 
-/* Solar */
-.solar{
-  font-size:2.8rem;
-  animation:glow 2s infinite alternate;
+.sun{
+  animation:sunshine 2s infinite alternate;
 }
 
-/* Plant */
-.plant{
-  font-size:2.8rem;
+.leaf{
   animation:grow 2s infinite alternate;
+}
+
+.arrow{
+  font-size:2rem !important;
+  color:#38bdf8;
+  animation:moveArrow 1s infinite alternate;
 }
 
 /* ===== MODAL ===== */
@@ -239,52 +224,63 @@ body{
   background:linear-gradient(135deg,#1e293b,#0f172a);
   border-radius:30px;
   padding:25px;
-  position:relative;
-  overflow:auto;
   max-height:95vh;
-  border:1px solid rgba(255,255,255,0.15);
+  overflow:auto;
+  position:relative;
 }
 
 .close-btn{
   position:absolute;
   right:20px;
   top:20px;
+  border:none;
   background:#ef4444;
   color:white;
-  border:none;
   padding:10px 18px;
   border-radius:999px;
   cursor:pointer;
 }
 
-/* AR AREA */
+/* ===== AR SCENE ===== */
 .ar-scene{
-  height:250px;
+  height:280px;
+  margin:25px 0;
   border-radius:24px;
-  margin:20px 0;
   position:relative;
   overflow:hidden;
-  background:radial-gradient(circle at center,#1e293b,#020617);
   display:flex;
   justify-content:center;
   align-items:center;
+  background:radial-gradient(circle,#1e293b,#020617);
+}
+
+.ar-scene span{
+  font-size:5rem;
 }
 
 .energy-flow{
   position:absolute;
   width:200%;
-  height:6px;
+  height:8px;
   background:linear-gradient(90deg,transparent,#38bdf8,#facc15,transparent);
   animation:flow 4s linear infinite;
 }
 
 .particle{
   position:absolute;
-  width:12px;
-  height:12px;
+  width:14px;
+  height:14px;
   border-radius:50%;
   background:#facc15;
   animation:float 4s infinite;
+}
+
+.fact{
+  margin-top:18px;
+  background:rgba(250,204,21,0.15);
+  padding:15px;
+  border-radius:16px;
+  border-left:4px solid #facc15;
 }
 
 .quiz{
@@ -294,8 +290,8 @@ body{
 .option{
   margin-top:10px;
   padding:14px;
-  background:#334155;
   border-radius:14px;
+  background:#334155;
   cursor:pointer;
   transition:0.3s;
 }
@@ -312,14 +308,7 @@ body{
   background:#ef4444 !important;
 }
 
-.fact{
-  margin-top:18px;
-  background:rgba(250,204,21,0.15);
-  padding:15px;
-  border-radius:16px;
-  border-left:4px solid #facc15;
-}
-
+/* ===== FINISH ===== */
 .finish-screen{
   min-height:100vh;
   display:flex;
@@ -335,14 +324,9 @@ body{
   margin-bottom:20px;
 }
 
-.finish-screen p{
-  max-width:700px;
-  line-height:1.8;
-}
-
 .tagline{
   text-align:center;
-  padding:30px 20px;
+  padding:30px;
   color:#cbd5e1;
   font-style:italic;
 }
@@ -353,56 +337,101 @@ body{
   50%{opacity:0.3}
 }
 
-@keyframes fireAnim{
-  from{transform:scale(1)}
-  to{transform:scale(1.2) translateY(-5px)}
+@keyframes burn{
+  from{
+    transform:scale(1);
+    filter:drop-shadow(0 0 5px orange);
+  }
+  to{
+    transform:scale(1.2) translateY(-5px);
+    filter:drop-shadow(0 0 20px red);
+  }
 }
 
 @keyframes spin{
-  from{transform:rotate(0)}
+  from{transform:rotate(0deg)}
   to{transform:rotate(360deg)}
 }
 
 @keyframes glow{
-  from{text-shadow:0 0 5px #fff}
-  to{text-shadow:0 0 25px #facc15}
-}
-
-@keyframes bounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  from{
+    transform:scale(1);
+    text-shadow:0 0 5px #fff;
+  }
+  to{
+    transform:scale(1.1);
+    text-shadow:0 0 30px yellow;
+  }
 }
 
 @keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.1)}
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.2);
+  }
 }
 
-@keyframes move{
-  from{transform:translateX(-10px)}
-  to{transform:translateX(10px)}
+@keyframes charge{
+  from{
+    transform:scale(1);
+    filter:drop-shadow(0 0 5px #38bdf8);
+  }
+  to{
+    transform:scale(1.15);
+    filter:drop-shadow(0 0 20px #22c55e);
+  }
+}
+
+@keyframes sunshine{
+  from{
+    transform:scale(1);
+    filter:drop-shadow(0 0 5px yellow);
+  }
+  to{
+    transform:scale(1.2);
+    filter:drop-shadow(0 0 25px yellow);
+  }
 }
 
 @keyframes grow{
-  from{transform:scale(1)}
-  to{transform:scale(1.15)}
+  from{
+    transform:scale(1);
+  }
+  to{
+    transform:scale(1.2);
+  }
+}
+
+@keyframes moveArrow{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(8px);
+  }
 }
 
 @keyframes flow{
-  from{transform:translateX(-50%)}
-  to{transform:translateX(0)}
+  from{
+    transform:translateX(-50%);
+  }
+  to{
+    transform:translateX(0%);
+  }
 }
 
 @keyframes float{
   0%{
-    transform:translateY(100px) scale(0.5);
+    transform:translateY(100px);
     opacity:0;
   }
   50%{
     opacity:1;
   }
   100%{
-    transform:translateY(-120px) scale(1.2);
+    transform:translateY(-120px);
     opacity:0;
   }
 }
@@ -412,8 +441,12 @@ body{
     font-size:2.2rem;
   }
 
-  .modal-content{
-    padding:20px;
+  .energy-box span{
+    font-size:3rem;
+  }
+
+  .ar-scene span{
+    font-size:4rem;
   }
 }
 </style>
@@ -424,17 +457,22 @@ body{
 <!-- INTRO -->
 <section class="intro" id="intro">
   <h1>⚡ Perubahan Bentuk Energi ⚡</h1>
+
   <p>
-    Jelajahi bagaimana energi berubah dari satu bentuk ke bentuk lain melalui simulasi interaktif seperti AR!
-    Klik kartu energi dan pelajari perubahan energi di kehidupan sehari-hari dengan animasi seru.
+    Pelajari bagaimana energi berubah bentuk melalui simulasi interaktif
+    seperti AR dengan animasi seru dan kuis menarik!
   </p>
-  <button class="start-btn" onclick="startApp()">Mulai Belajar</button>
+
+  <button class="start-btn" onclick="startApp()">
+    Mulai Belajar
+  </button>
 </section>
 
-<!-- MAIN APP -->
+<!-- MAIN -->
 <section id="app" class="hidden">
 
   <div class="topbar">
+
     <div class="stats">
       <div id="learnedText">Sudah dipelajari: 0/10</div>
       <div id="scoreText">Skor: 0</div>
@@ -443,6 +481,7 @@ body{
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
+
   </div>
 
   <div class="container">
@@ -457,21 +496,26 @@ body{
 
 <!-- MODAL -->
 <div class="modal hidden" id="modal">
+
   <div class="modal-content">
 
-    <button class="close-btn" onclick="closeModal()">Kembali</button>
+    <button class="close-btn" onclick="closeModal()">
+      Kembali
+    </button>
 
     <h2 id="modalTitle"></h2>
 
     <div class="ar-scene">
+
       <div class="energy-flow"></div>
 
-      <div style="font-size:5rem; z-index:2;" id="modalIcon"></div>
+      <div id="modalAnimation"></div>
 
       <div class="particle" style="left:20%; animation-delay:0s;"></div>
       <div class="particle" style="left:40%; animation-delay:1s;"></div>
       <div class="particle" style="left:60%; animation-delay:2s;"></div>
       <div class="particle" style="left:80%; animation-delay:3s;"></div>
+
     </div>
 
     <p id="modalDesc"></p>
@@ -482,161 +526,234 @@ body{
     </div>
 
     <div class="quiz">
+
       <h3>Kuis Cepat</h3>
+
       <p id="quizQuestion"></p>
 
       <div id="quizOptions"></div>
+
     </div>
 
   </div>
+
 </div>
 
 <!-- FINISH -->
 <section class="finish-screen hidden" id="finishScreen">
+
   <h1>🎉 Selamat! 🎉</h1>
-  <h2>Kamu telah menyelesaikan semua kartu energi.</h2>
+
+  <h2>Kamu sudah mempelajari semua perubahan energi!</h2>
+
   <br>
+
   <h2 id="finalScore"></h2>
+
   <br>
+
   <p>
-    Hebat! Kamu sudah memahami bagaimana energi berubah bentuk dalam kehidupan sehari-hari.
-    Terus semangat belajar sains dan eksplorasi teknologi di sekitarmu!
+    Hebat! Kamu telah memahami berbagai perubahan energi di kehidupan sehari-hari.
+    Terus semangat belajar sains dan teknologi!
   </p>
+
 </section>
 
 <script>
 
 const cards = [
+
 {
-  title:"Listrik → Panas",
-  example:"Setrika Listrik",
-  icon:"⚡🔥",
-  desc:"Energi listrik pada setrika berubah menjadi energi panas. Panas ini digunakan untuk merapikan pakaian.",
-  fact:"Setrika listrik menggunakan elemen pemanas khusus agar suhu cepat meningkat.",
-  quiz:{
-    question:"Energi apa yang dihasilkan setrika listrik?",
-    options:["Panas","Bunyi","Gerak"],
-    answer:0
-  },
-  emojiClass:"fire"
-},
-{
-  title:"Listrik → Gerak",
-  example:"Kipas Angin",
-  icon:"⚡🌀",
-  desc:"Kipas angin mengubah energi listrik menjadi energi gerak sehingga baling-baling dapat berputar.",
-  fact:"Motor listrik di dalam kipas membuat baling-baling bergerak cepat.",
-  quiz:{
-    question:"Apa hasil perubahan energi pada kipas angin?",
-    options:["Cahaya","Gerak","Kimia"],
-    answer:1
-  },
-  emojiClass:"fan"
-},
-{
-  title:"Listrik → Cahaya",
-  example:"Lampu Pijar",
-  icon:"⚡💡",
-  desc:"Lampu pijar mengubah energi listrik menjadi cahaya untuk menerangi ruangan.",
-  fact:"Sebagian energi lampu pijar juga berubah menjadi panas.",
-  quiz:{
-    question:"Lampu menghasilkan energi?",
-    options:["Cahaya","Kimia","Gerak"],
-    answer:0
-  },
-  emojiClass:"bulb"
-},
-{
-  title:"Listrik → Bunyi",
-  example:"Speaker",
-  icon:"⚡🔊",
-  desc:"Speaker mengubah energi listrik menjadi getaran suara yang dapat didengar manusia.",
-  fact:"Getaran kecil pada speaker dapat menghasilkan suara keras.",
-  quiz:{
-    question:"Speaker menghasilkan energi?",
-    options:["Bunyi","Panas","Kimia"],
-    answer:0
-  },
-  emojiClass:"sound"
-},
-{
-  title:"Listrik → Kimia",
-  example:"Baterai HP",
-  icon:"⚡🔋",
-  desc:"Saat mengisi baterai HP, energi listrik disimpan menjadi energi kimia.",
-  fact:"Baterai lithium modern dapat diisi ulang ratusan kali.",
-  quiz:{
-    question:"Energi disimpan dalam baterai sebagai?",
-    options:["Kimia","Gerak","Panas"],
-    answer:0
-  },
-  emojiClass:"battery"
-},
-{
-  title:"Kimia → Panas & Cahaya",
-  example:"Api Unggun",
-  icon:"🧪🔥",
-  desc:"Kayu yang dibakar mengubah energi kimia menjadi panas dan cahaya.",
-  fact:"Pembakaran disebut juga reaksi oksidasi.",
-  quiz:{
-    question:"Api unggun menghasilkan?",
-    options:["Panas dan cahaya","Listrik","Gerak"],
-    answer:0
-  },
-  emojiClass:"fire"
-},
-{
-  title:"Kimia → Gerak",
-  example:"Mesin Mobil",
-  icon:"⛽🚗",
-  desc:"Bahan bakar mobil mengandung energi kimia yang berubah menjadi gerak.",
-  fact:"Mesin mobil bekerja melalui ledakan kecil di ruang bakar.",
-  quiz:{
-    question:"Bensin di mobil berubah menjadi?",
-    options:["Gerak","Bunyi","Kimia"],
-    answer:0
-  },
-  emojiClass:"car"
-},
-{
-  title:"Gerak → Listrik",
-  example:"Turbin Angin",
-  icon:"🌪️⚡",
-  desc:"Gerakan baling-baling turbin angin menghasilkan energi listrik.",
-  fact:"Turbin angin membantu menghasilkan energi ramah lingkungan.",
-  quiz:{
-    question:"Turbin angin menghasilkan?",
-    options:["Kimia","Listrik","Panas"],
-    answer:1
-  },
-  emojiClass:"wind"
-},
-{
-  title:"Cahaya → Listrik",
-  example:"Panel Surya",
-  icon:"☀️⚡",
-  desc:"Panel surya menangkap cahaya matahari dan mengubahnya menjadi listrik.",
-  fact:"Energi matahari termasuk energi terbarukan.",
-  quiz:{
-    question:"Panel surya mengubah cahaya menjadi?",
-    options:["Panas","Listrik","Gerak"],
-    answer:1
-  },
-  emojiClass:"solar"
-},
-{
-  title:"Cahaya → Kimia",
-  example:"Daun Tumbuhan",
-  icon:"☀️🌿",
-  desc:"Tumbuhan melakukan fotosintesis dengan mengubah cahaya menjadi energi kimia.",
-  fact:"Fotosintesis menghasilkan oksigen untuk makhluk hidup.",
-  quiz:{
-    question:"Fotosintesis menghasilkan energi?",
-    options:["Kimia","Gerak","Bunyi"],
-    answer:0
-  },
-  emojiClass:"plant"
+title:"Listrik → Panas",
+example:"Setrika Listrik",
+animation:`
+<div class="energy-box">
+  <span class="bolt">⚡</span>
+  <span class="arrow">➡️</span>
+  <span class="fire">🔥</span>
+</div>
+`,
+desc:"Energi listrik pada setrika berubah menjadi energi panas untuk merapikan pakaian.",
+fact:"Elemen pemanas pada setrika bisa menjadi sangat panas dalam waktu singkat.",
+quiz:{
+question:"Energi apa yang dihasilkan setrika?",
+options:["Panas","Gerak","Bunyi"],
+answer:0
 }
+},
+
+{
+title:"Listrik → Gerak",
+example:"Kipas Angin",
+animation:`
+<div class="energy-box">
+  <span class="bolt">⚡</span>
+  <span class="arrow">➡️</span>
+  <span class="fan">🌀</span>
+</div>
+`,
+desc:"Energi listrik membuat motor kipas berputar menghasilkan gerakan.",
+fact:"Motor listrik kecil pada kipas mengubah listrik menjadi putaran.",
+quiz:{
+question:"Kipas menghasilkan energi?",
+options:["Kimia","Gerak","Cahaya"],
+answer:1
+}
+},
+
+{
+title:"Listrik → Cahaya",
+example:"Lampu Pijar",
+animation:`
+<div class="energy-box">
+  <span class="bolt">⚡</span>
+  <span class="arrow">➡️</span>
+  <span class="bulb">💡</span>
+</div>
+`,
+desc:"Lampu mengubah energi listrik menjadi cahaya terang.",
+fact:"Lampu pijar juga menghasilkan panas selain cahaya.",
+quiz:{
+question:"Lampu menghasilkan energi?",
+options:["Cahaya","Kimia","Gerak"],
+answer:0
+}
+},
+
+{
+title:"Listrik → Bunyi",
+example:"Speaker",
+animation:`
+<div class="energy-box">
+  <span class="bolt">⚡</span>
+  <span class="arrow">➡️</span>
+  <span class="sound">🔊</span>
+</div>
+`,
+desc:"Speaker mengubah energi listrik menjadi getaran suara.",
+fact:"Gelombang suara bergerak melalui udara ke telinga kita.",
+quiz:{
+question:"Speaker menghasilkan energi?",
+options:["Panas","Bunyi","Kimia"],
+answer:1
+}
+},
+
+{
+title:"Listrik → Kimia",
+example:"Baterai HP",
+animation:`
+<div class="energy-box">
+  <span class="bolt">⚡</span>
+  <span class="arrow">➡️</span>
+  <span class="battery">🔋</span>
+</div>
+`,
+desc:"Saat diisi daya, energi listrik disimpan menjadi energi kimia di baterai.",
+fact:"Baterai lithium dapat diisi ulang ratusan kali.",
+quiz:{
+question:"Energi disimpan di baterai sebagai?",
+options:["Kimia","Gerak","Bunyi"],
+answer:0
+}
+},
+
+{
+title:"Kimia → Panas & Cahaya",
+example:"Api Unggun",
+animation:`
+<div class="energy-box">
+  <span class="battery">🧪</span>
+  <span class="arrow">➡️</span>
+  <span class="fire">🔥</span>
+</div>
+`,
+desc:"Kayu yang dibakar mengubah energi kimia menjadi panas dan cahaya.",
+fact:"Api menghasilkan panas karena reaksi pembakaran.",
+quiz:{
+question:"Api unggun menghasilkan?",
+options:["Panas & Cahaya","Listrik","Gerak"],
+answer:0
+}
+},
+
+{
+title:"Kimia → Gerak",
+example:"Mesin Mobil",
+animation:`
+<div class="energy-box">
+  <span class="battery">🧪</span>
+  <span class="arrow">➡️</span>
+  <span class="gear">⚙️</span>
+</div>
+`,
+desc:"Bensin di mesin mobil berubah menjadi energi gerak.",
+fact:"Ledakan kecil di mesin mendorong piston bergerak.",
+quiz:{
+question:"Mesin mobil menghasilkan?",
+options:["Gerak","Kimia","Cahaya"],
+answer:0
+}
+},
+
+{
+title:"Gerak → Listrik",
+example:"Turbin Angin",
+animation:`
+<div class="energy-box">
+  <span class="fan">🌀</span>
+  <span class="arrow">➡️</span>
+  <span class="bolt">⚡</span>
+</div>
+`,
+desc:"Gerakan turbin angin dapat menghasilkan listrik.",
+fact:"Turbin angin termasuk sumber energi ramah lingkungan.",
+quiz:{
+question:"Turbin angin menghasilkan?",
+options:["Panas","Kimia","Listrik"],
+answer:2
+}
+},
+
+{
+title:"Cahaya → Listrik",
+example:"Panel Surya",
+animation:`
+<div class="energy-box">
+  <span class="sun">☀️</span>
+  <span class="arrow">➡️</span>
+  <span class="bolt">⚡</span>
+</div>
+`,
+desc:"Panel surya mengubah cahaya matahari menjadi energi listrik.",
+fact:"Energi matahari adalah energi terbarukan.",
+quiz:{
+question:"Panel surya menghasilkan?",
+options:["Gerak","Listrik","Bunyi"],
+answer:1
+}
+},
+
+{
+title:"Cahaya → Kimia",
+example:"Fotosintesis",
+animation:`
+<div class="energy-box">
+  <span class="sun">☀️</span>
+  <span style="font-size:1.2rem;">+ CO₂ + H₂O</span>
+  <span class="arrow">➡️</span>
+  <span class="leaf">🌿</span>
+</div>
+`,
+desc:"Tumbuhan menggunakan cahaya matahari untuk membuat makanan.",
+fact:"Fotosintesis menghasilkan oksigen yang kita hirup.",
+quiz:{
+question:"Fotosintesis menghasilkan energi?",
+options:["Kimia","Gerak","Bunyi"],
+answer:0
+}
+}
+
 ];
 
 const grid = document.getElementById("cardGrid");
@@ -653,6 +770,7 @@ function startApp(){
 cards.forEach((card,index)=>{
 
   const div = document.createElement("div");
+
   div.className = "card";
 
   div.innerHTML = `
@@ -660,11 +778,7 @@ cards.forEach((card,index)=>{
 
     <h3>${card.title}</h3>
 
-    <div class="energy-animation">
-      <div class="${card.emojiClass}">
-        ${card.icon}
-      </div>
-    </div>
+    ${card.animation}
 
     <p>${card.example}</p>
   `;
@@ -684,11 +798,14 @@ function openModal(index){
   document.getElementById("modalTitle").innerText =
     card.title + " — " + card.example;
 
-  document.getElementById("modalIcon").innerText = card.icon;
+  document.getElementById("modalAnimation").innerHTML =
+    card.animation;
 
-  document.getElementById("modalDesc").innerText = card.desc;
+  document.getElementById("modalDesc").innerText =
+    card.desc;
 
-  document.getElementById("modalFact").innerText = card.fact;
+  document.getElementById("modalFact").innerText =
+    card.fact;
 
   document.getElementById("quizQuestion").innerText =
     card.quiz.question;
@@ -700,7 +817,9 @@ function openModal(index){
   card.quiz.options.forEach((opt,i)=>{
 
     const option = document.createElement("div");
+
     option.className = "option";
+
     option.innerText = opt;
 
     option.onclick = ()=>{
@@ -717,6 +836,7 @@ function openModal(index){
       }
 
       updateScore();
+
     };
 
     optionsDiv.appendChild(option);
@@ -731,7 +851,8 @@ function openModal(index){
 
 function closeModal(){
 
-  document.getElementById("modal").classList.add("hidden");
+  document.getElementById("modal")
+    .classList.add("hidden");
 
   if(learned.size === 10){
     showFinish();
@@ -758,13 +879,14 @@ function updateScore(){
 
 function showFinish(){
 
-  document.getElementById("app").classList.add("hidden");
+  document.getElementById("app")
+    .classList.add("hidden");
 
   document.getElementById("finishScreen")
     .classList.remove("hidden");
 
   document.getElementById("finalScore").innerText =
-    `Skor Akhir Kamu: ${score}/10`;
+    `Skor Akhir: ${score}/10`;
 
 }
 

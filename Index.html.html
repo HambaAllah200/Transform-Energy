@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Perubahan Bentuk Energi</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+  color:white;
+  overflow-x:hidden;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* ===== INTRO ===== */
+.intro{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.intro h1{
+  font-size:3rem;
+  margin-bottom:20px;
+  background:linear-gradient(to right,#facc15,#38bdf8,#a855f7);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.intro p{
+  max-width:700px;
+  line-height:1.7;
+  margin-bottom:30px;
+  color:#e2e8f0;
+}
+
+.start-btn{
+  padding:15px 35px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(90deg,#38bdf8,#facc15);
+  color:#111;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+  transition:0.3s;
+}
+
+.start-btn:hover{
+  transform:scale(1.05);
+}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(15,23,42,0.9);
+  backdrop-filter:blur(10px);
+  padding:15px;
+}
+
+.progress-container{
+  width:100%;
+  height:18px;
+  background:#1e293b;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#22c55e,#facc15);
+  transition:0.4s;
+}
+
+.stats{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:0.95rem;
+}
+
+/* ===== GRID ===== */
+.container{
+  padding:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:24px;
+  padding:20px;
+  cursor:pointer;
+  transition:0.35s;
+  position:relative;
+  overflow:hidden;
+  min-height:280px;
+}
+
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 15px 35px rgba(0,0,0,0.4);
+}
+
+.card-number{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#facc15;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin-bottom:15px;
+  font-size:1.1rem;
+}
+
+.card p{
+  margin-top:15px;
+  color:#cbd5e1;
+}
+
+/* ===== ENERGY ICON AREA ===== */
+.energy-animation{
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  margin-top:10px;
+}
+
+/* Electric */
+.bolt{
+  font-size:2.8rem;
+  color:#38bdf8;
+  animation:flash 1s infinite;
+}
+
+/* Fire */
+.fire{
+  font-size:2.8rem;
+  animation:fireAnim 1s infinite alternate;
+}
+
+/* Fan */
+.fan{
+  font-size:2.8rem;
+  animation:spin 2s linear infinite;
+}
+
+/* Light */
+.bulb{
+  font-size:2.8rem;
+  animation:glow 1.2s infinite alternate;
+}
+
+/* Sound */
+.sound{
+  font-size:2.8rem;
+  animation:bounce 1s infinite;
+}
+
+/* Battery */
+.battery{
+  font-size:2.8rem;
+  animation:pulse 1.5s infinite;
+}
+
+/* Car */
+.car{
+  font-size:2.8rem;
+  animation:move 2s infinite alternate;
+}
+
+/* Wind */
+.wind{
+  font-size:2.8rem;
+  animation:spin 3s linear infinite;
+}
+
+/* Solar */
+.solar{
+  font-size:2.8rem;
+  animation:glow 2s infinite alternate;
+}
+
+/* Plant */
+.plant{
+  font-size:2.8rem;
+  animation:grow 2s infinite alternate;
+}
+
+/* ===== MODAL ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,0.96);
+  z-index:999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.modal-content{
+  width:100%;
+  max-width:900px;
+  background:linear-gradient(135deg,#1e293b,#0f172a);
+  border-radius:30px;
+  padding:25px;
+  position:relative;
+  overflow:auto;
+  max-height:95vh;
+  border:1px solid rgba(255,255,255,0.15);
+}
+
+.close-btn{
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:999px;
+  cursor:pointer;
+}
+
+/* AR AREA */
+.ar-scene{
+  height:250px;
+  border-radius:24px;
+  margin:20px 0;
+  position:relative;
+  overflow:hidden;
+  background:radial-gradient(circle at center,#1e293b,#020617);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.energy-flow{
+  position:absolute;
+  width:200%;
+  height:6px;
+  background:linear-gradient(90deg,transparent,#38bdf8,#facc15,transparent);
+  animation:flow 4s linear infinite;
+}
+
+.particle{
+  position:absolute;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#facc15;
+  animation:float 4s infinite;
+}
+
+.quiz{
+  margin-top:20px;
+}
+
+.option{
+  margin-top:10px;
+  padding:14px;
+  background:#334155;
+  border-radius:14px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.option:hover{
+  background:#475569;
+}
+
+.correct{
+  background:#22c55e !important;
+}
+
+.wrong{
+  background:#ef4444 !important;
+}
+
+.fact{
+  margin-top:18px;
+  background:rgba(250,204,21,0.15);
+  padding:15px;
+  border-radius:16px;
+  border-left:4px solid #facc15;
+}
+
+.finish-screen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+}
+
+.finish-screen h1{
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.finish-screen p{
+  max-width:700px;
+  line-height:1.8;
+}
+
+.tagline{
+  text-align:center;
+  padding:30px 20px;
+  color:#cbd5e1;
+  font-style:italic;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes flash{
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
+
+@keyframes fireAnim{
+  from{transform:scale(1)}
+  to{transform:scale(1.2) translateY(-5px)}
+}
+
+@keyframes spin{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 5px #fff}
+  to{text-shadow:0 0 25px #facc15}
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+
+@keyframes move{
+  from{transform:translateX(-10px)}
+  to{transform:translateX(10px)}
+}
+
+@keyframes grow{
+  from{transform:scale(1)}
+  to{transform:scale(1.15)}
+}
+
+@keyframes flow{
+  from{transform:translateX(-50%)}
+  to{transform:translateX(0)}
+}
+
+@keyframes float{
+  0%{
+    transform:translateY(100px) scale(0.5);
+    opacity:0;
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-120px) scale(1.2);
+    opacity:0;
+  }
+}
+
+@media(max-width:600px){
+  .intro h1{
+    font-size:2.2rem;
+  }
+
+  .modal-content{
+    padding:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <h1>⚡ Perubahan Bentuk Energi ⚡</h1>
+  <p>
+    Jelajahi bagaimana energi berubah dari satu bentuk ke bentuk lain melalui simulasi interaktif seperti AR!
+    Klik kartu energi dan pelajari perubahan energi di kehidupan sehari-hari dengan animasi seru.
+  </p>
+  <button class="start-btn" onclick="startApp()">Mulai Belajar</button>
+</section>
+
+<!-- MAIN APP -->
+<section id="app" class="hidden">
+
+  <div class="topbar">
+    <div class="stats">
+      <div id="learnedText">Sudah dipelajari: 0/10</div>
+      <div id="scoreText">Skor: 0</div>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid" id="cardGrid"></div>
+  </div>
+
+  <div class="tagline">
+    "Energi tidak dapat diciptakan atau dimusnakan, hanya berubah bentuk!"
+  </div>
+
+</section>
+
+<!-- MODAL -->
+<div class="modal hidden" id="modal">
+  <div class="modal-content">
+
+    <button class="close-btn" onclick="closeModal()">Kembali</button>
+
+    <h2 id="modalTitle"></h2>
+
+    <div class="ar-scene">
+      <div class="energy-flow"></div>
+
+      <div style="font-size:5rem; z-index:2;" id="modalIcon"></div>
+
+      <div class="particle" style="left:20%; animation-delay:0s;"></div>
+      <div class="particle" style="left:40%; animation-delay:1s;"></div>
+      <div class="particle" style="left:60%; animation-delay:2s;"></div>
+      <div class="particle" style="left:80%; animation-delay:3s;"></div>
+    </div>
+
+    <p id="modalDesc"></p>
+
+    <div class="fact">
+      <strong>Fakta Menarik:</strong>
+      <p id="modalFact"></p>
+    </div>
+
+    <div class="quiz">
+      <h3>Kuis Cepat</h3>
+      <p id="quizQuestion"></p>
+
+      <div id="quizOptions"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FINISH -->
+<section class="finish-screen hidden" id="finishScreen">
+  <h1>🎉 Selamat! 🎉</h1>
+  <h2>Kamu telah menyelesaikan semua kartu energi.</h2>
+  <br>
+  <h2 id="finalScore"></h2>
+  <br>
+  <p>
+    Hebat! Kamu sudah memahami bagaimana energi berubah bentuk dalam kehidupan sehari-hari.
+    Terus semangat belajar sains dan eksplorasi teknologi di sekitarmu!
+  </p>
+</section>
+
+<script>
+
+const cards = [
+{
+  title:"Listrik → Panas",
+  example:"Setrika Listrik",
+  icon:"⚡🔥",
+  desc:"Energi listrik pada setrika berubah menjadi energi panas. Panas ini digunakan untuk merapikan pakaian.",
+  fact:"Setrika listrik menggunakan elemen pemanas khusus agar suhu cepat meningkat.",
+  quiz:{
+    question:"Energi apa yang dihasilkan setrika listrik?",
+    options:["Panas","Bunyi","Gerak"],
+    answer:0
+  },
+  emojiClass:"fire"
+},
+{
+  title:"Listrik → Gerak",
+  example:"Kipas Angin",
+  icon:"⚡🌀",
+  desc:"Kipas angin mengubah energi listrik menjadi energi gerak sehingga baling-baling dapat berputar.",
+  fact:"Motor listrik di dalam kipas membuat baling-baling bergerak cepat.",
+  quiz:{
+    question:"Apa hasil perubahan energi pada kipas angin?",
+    options:["Cahaya","Gerak","Kimia"],
+    answer:1
+  },
+  emojiClass:"fan"
+},
+{
+  title:"Listrik → Cahaya",
+  example:"Lampu Pijar",
+  icon:"⚡💡",
+  desc:"Lampu pijar mengubah energi listrik menjadi cahaya untuk menerangi ruangan.",
+  fact:"Sebagian energi lampu pijar juga berubah menjadi panas.",
+  quiz:{
+    question:"Lampu menghasilkan energi?",
+    options:["Cahaya","Kimia","Gerak"],
+    answer:0
+  },
+  emojiClass:"bulb"
+},
+{
+  title:"Listrik → Bunyi",
+  example:"Speaker",
+  icon:"⚡🔊",
+  desc:"Speaker mengubah energi listrik menjadi getaran suara yang dapat didengar manusia.",
+  fact:"Getaran kecil pada speaker dapat menghasilkan suara keras.",
+  quiz:{
+    question:"Speaker menghasilkan energi?",
+    options:["Bunyi","Panas","Kimia"],
+    answer:0
+  },
+  emojiClass:"sound"
+},
+{
+  title:"Listrik → Kimia",
+  example:"Baterai HP",
+  icon:"⚡🔋",
+  desc:"Saat mengisi baterai HP, energi listrik disimpan menjadi energi kimia.",
+  fact:"Baterai lithium modern dapat diisi ulang ratusan kali.",
+  quiz:{
+    question:"Energi disimpan dalam baterai sebagai?",
+    options:["Kimia","Gerak","Panas"],
+    answer:0
+  },
+  emojiClass:"battery"
+},
+{
+  title:"Kimia → Panas & Cahaya",
+  example:"Api Unggun",
+  icon:"🧪🔥",
+  desc:"Kayu yang dibakar mengubah energi kimia menjadi panas dan cahaya.",
+  fact:"Pembakaran disebut juga reaksi oksidasi.",
+  quiz:{
+    question:"Api unggun menghasilkan?",
+    options:["Panas dan cahaya","Listrik","Gerak"],
+    answer:0
+  },
+  emojiClass:"fire"
+},
+{
+  title:"Kimia → Gerak",
+  example:"Mesin Mobil",
+  icon:"⛽🚗",
+  desc:"Bahan bakar mobil mengandung energi kimia yang berubah menjadi gerak.",
+  fact:"Mesin mobil bekerja melalui ledakan kecil di ruang bakar.",
+  quiz:{
+    question:"Bensin di mobil berubah menjadi?",
+    options:["Gerak","Bunyi","Kimia"],
+    answer:0
+  },
+  emojiClass:"car"
+},
+{
+  title:"Gerak → Listrik",
+  example:"Turbin Angin",
+  icon:"🌪️⚡",
+  desc:"Gerakan baling-baling turbin angin menghasilkan energi listrik.",
+  fact:"Turbin angin membantu menghasilkan energi ramah lingkungan.",
+  quiz:{
+    question:"Turbin angin menghasilkan?",
+    options:["Kimia","Listrik","Panas"],
+    answer:1
+  },
+  emojiClass:"wind"
+},
+{
+  title:"Cahaya → Listrik",
+  example:"Panel Surya",
+  icon:"☀️⚡",
+  desc:"Panel surya menangkap cahaya matahari dan mengubahnya menjadi listrik.",
+  fact:"Energi matahari termasuk energi terbarukan.",
+  quiz:{
+    question:"Panel surya mengubah cahaya menjadi?",
+    options:["Panas","Listrik","Gerak"],
+    answer:1
+  },
+  emojiClass:"solar"
+},
+{
+  title:"Cahaya → Kimia",
+  example:"Daun Tumbuhan",
+  icon:"☀️🌿",
+  desc:"Tumbuhan melakukan fotosintesis dengan mengubah cahaya menjadi energi kimia.",
+  fact:"Fotosintesis menghasilkan oksigen untuk makhluk hidup.",
+  quiz:{
+    question:"Fotosintesis menghasilkan energi?",
+    options:["Kimia","Gerak","Bunyi"],
+    answer:0
+  },
+  emojiClass:"plant"
+}
+];
+
+const grid = document.getElementById("cardGrid");
+
+let learned = new Set();
+let score = 0;
+let answered = {};
+
+function startApp(){
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+}
+
+cards.forEach((card,index)=>{
+
+  const div = document.createElement("div");
+  div.className = "card";
+
+  div.innerHTML = `
+    <div class="card-number">${index+1}</div>
+
+    <h3>${card.title}</h3>
+
+    <div class="energy-animation">
+      <div class="${card.emojiClass}">
+        ${card.icon}
+      </div>
+    </div>
+
+    <p>${card.example}</p>
+  `;
+
+  div.onclick = ()=>openModal(index);
+
+  grid.appendChild(div);
+
+});
+
+function openModal(index){
+
+  const card = cards[index];
+
+  document.getElementById("modal").classList.remove("hidden");
+
+  document.getElementById("modalTitle").innerText =
+    card.title + " — " + card.example;
+
+  document.getElementById("modalIcon").innerText = card.icon;
+
+  document.getElementById("modalDesc").innerText = card.desc;
+
+  document.getElementById("modalFact").innerText = card.fact;
+
+  document.getElementById("quizQuestion").innerText =
+    card.quiz.question;
+
+  const optionsDiv = document.getElementById("quizOptions");
+
+  optionsDiv.innerHTML = "";
+
+  card.quiz.options.forEach((opt,i)=>{
+
+    const option = document.createElement("div");
+    option.className = "option";
+    option.innerText = opt;
+
+    option.onclick = ()=>{
+
+      if(answered[index]) return;
+
+      answered[index] = true;
+
+      if(i === card.quiz.answer){
+        option.classList.add("correct");
+        score++;
+      }else{
+        option.classList.add("wrong");
+      }
+
+      updateScore();
+    };
+
+    optionsDiv.appendChild(option);
+
+  });
+
+  learned.add(index);
+
+  updateProgress();
+
+}
+
+function closeModal(){
+
+  document.getElementById("modal").classList.add("hidden");
+
+  if(learned.size === 10){
+    showFinish();
+  }
+
+}
+
+function updateProgress(){
+
+  document.getElementById("learnedText").innerText =
+    `Sudah dipelajari: ${learned.size}/10`;
+
+  document.getElementById("progressBar").style.width =
+    (learned.size/10)*100 + "%";
+
+}
+
+function updateScore(){
+
+  document.getElementById("scoreText").innerText =
+    `Skor: ${score}`;
+
+}
+
+function showFinish(){
+
+  document.getElementById("app").classList.add("hidden");
+
+  document.getElementById("finishScreen")
+    .classList.remove("hidden");
+
+  document.getElementById("finalScore").innerText =
+    `Skor Akhir Kamu: ${score}/10`;
+
+}
+
+</script>
+
+</body>
+</html>
